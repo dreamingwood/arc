@@ -1,0 +1,63 @@
+{{subbody}}
+ <button type="button" class="btn primary" onclick="change_sth()" >Default</button>
+<br>
+<div id="abc">
+    abc div
+</div>
+<br>
+<div id="abc2">
+    abc div
+</div>
+
+<div id="log2">
+    ajax log
+</div>
+
+<div id="wzdetail">
+    ajax log
+</div>
+
+<script>
+    
+    //写AJAX日志到div  
+function ajaxLog(s) {
+    var txt = $('#log2');
+    txt.html(txt.html() + '\n' + s);
+};
+    
+    function ajaxLog2(s) {
+    var txt = $('#wzdetail');
+    txt.html(s);
+};
+    
+    function change_sth(){
+           // alert('jQuery版本：' + $.fn.jquery);
+        var j1 = $('#abc');
+        j1.text('JavaScript & ECMAScript');
+        
+        $('#abc2').html('<span style="color: red">JavaScript</span>');
+
+        
+        var jqxhr = $.get('/statistics/in_wz_search', {
+            sfl: '3'
+            }).done(function (data) {
+                    ajaxLog2(data);
+            }).fail(function (xhr, status) {
+                    ajaxLog('失败: ' + xhr.status + ', 原因: ' + status);
+            }).always(function () {
+                    ajaxLog('请求完成: 无论成功或失败都会调用');
+            });
+
+        
+    };
+
+
+
+
+
+
+    //  j1.html('<span style="color: red">JavaScript</span>');
+    //setTimeout(function(){change_sth()},2000);
+   
+
+    </script>

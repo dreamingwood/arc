@@ -1,0 +1,48 @@
+
+
+ <div class="page-header">
+        <h1>供应科月度经济活动分析数据</h1>
+
+
+
+ 
+
+          <table class="table table-striped" >
+            <thead>
+              <tr>
+                <th>月份</th>
+                <th>供应额</th>
+                <th>总公司采购</th>
+                <th>机电</th>
+                <th>机车</th>
+                <th>车辆</th>
+                <th>工务</th>
+                <th>钢轨（t）</th>
+                <th>钢轨（万元）</th>
+                <th>柴油（t）</th>
+                <th>柴油（万元）</th>
+                <th>柴油低烧（t）</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+     {{#each DIV_SUMMARY}}
+              <tr>
+                <td>{{NY_ID}}</td>
+                <td>{{GYE}}</td>
+                <td>{{ZGS_HJ}}</td>       
+                <td>{{JD_HJ}}</a></td>
+                <td>{{JC_HJ}}</td>
+                <td>{{CL_HJ}}</td>
+                <td>{{GW_HJ}}</td>
+                <td>{{GG_T}}</td>
+                <td>{{GG_JE}}</td>
+                <td>{{CY_T}}</a></td>
+                <td>{{CY_JE}}</td>
+                <td>{{CY_DS_T_HJ}}</td>
+              </tr>
+     {{/each}}
+ 
+            </tbody>
+          </table>
+</div>

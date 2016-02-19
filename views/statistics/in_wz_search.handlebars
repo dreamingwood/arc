@@ -1,0 +1,51 @@
+
+
+ <div id="wz_detail" class="page-header">
+        <h1>收料信息查询</h1>
+
+
+
+ 
+
+          <table class="table table-striped table-hover" >
+            <thead>
+              <tr>
+                <th>单位名称</th>
+                <th>日期</th>
+                <th>物资编号</th>
+                <th>物资名称</th>
+                
+                <th>规格型号</th>
+                <th>计量单位</th>
+                <th>单价</th>
+                <th>金额</th>
+                
+                <th>供应商</th>
+                <th>车型</th>
+                <th>权限</th>
+
+              </tr>
+            </thead>
+            <tbody>
+     {{#each WZ_DETAIL}}
+              <tr>
+                <td>{{SUNITNAME}}</td>
+                <td>{{NY}}</td>
+                <td>{{SMATLCODE}}</td>
+                <td>{{SMATLNAME}}</td>
+                
+                 <td>{{SMATLTYPE}}</td>
+                <td>{{SMATLUNIT}}</td>
+                <td>{{NPURPRICE}}</td>
+                <td>{{NPURSUM}}</td>
+                
+                <td>{{SRLUUNITNAME}}</td>
+                <td>{{TRAINTYPE}}</td>
+                <td>{{QX}}</td>
+   
+              </tr>
+     {{/each}}
+ 
+            </tbody>
+          </table>
+</div>

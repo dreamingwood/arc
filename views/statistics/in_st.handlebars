@@ -1,0 +1,39 @@
+
+
+ <div class="page-header">
+        <h1>{{dwmc_main}}2015年物资收料统计</h1>
+
+
+
+ 
+
+          <table class="table table-striped" >
+            <thead>
+              <tr>
+                  <th>单位名称</th>
+                  <th>   </th>
+                <th>父类编号</th>
+                <th>大类编号</th>
+                <th>大类名称</th>
+                <th>采购金额</th>
+                <th>单据笔数</th>
+                <th>物资品类数</th>
+              </tr>
+            </thead>
+            <tbody>
+     {{#each IN_ST}}
+              <tr>
+                <td>{{dwmc}}</td>
+                <td></td>
+                <td><a href="/statistics/in_st?fl={{sfl}}&dwbh={{dwbh}}">{{sfl}}</td>
+                <td>{{fl}}</td>
+                <td><a href="/statistics/in_st2?sfl={{fl}}&dwbh={{dwbh}}">{{mc}}</a></td>
+                <td>{{npursum}}</td>
+                <td>{{djcount}}</td>
+                <td>{{wzcount}}</td>
+              </tr>
+     {{/each}}
+ 
+            </tbody>
+          </table>
+</div>

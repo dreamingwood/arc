@@ -1,0 +1,33 @@
+    <!-- 收料信息--物资明细情况查询--主页 -->
+    
+    
+ <div class="page-header">
+        <h1>Ajax测试</h1>
+
+
+          <table class="table table-striped" >
+            <thead>
+              <tr>
+                <th>父类编号</th>
+                <th>大类编号</th>
+                <th>大类名称</th>
+                <th>采购金额</th>
+                <th>单据笔数</th>
+                <th>物资品类数</th>
+              </tr>
+            </thead>
+            <tbody>
+     {{#each IN_ST}}
+              <tr>
+                <td><a href="/statistics/in_st?fl={{sfl}}">{{sfl}}</td>
+                <td>{{fl}}</td>
+                <td><a href="/statistics/in_st2?sfl={{fl}}">{{mc}}</a></td>
+                <td>{{npursum}}</td>
+                <td>{{djcount}}</td>
+                <td>{{wzcount}}</td>
+              </tr>
+     {{/each}}
+ 
+            </tbody>
+          </table>
+</div>

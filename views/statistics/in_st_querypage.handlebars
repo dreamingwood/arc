@@ -1,0 +1,123 @@
+
+
+<div class="row">
+  <div class="col-lg-3">
+    <div class="input-group">
+        <span class="input-group-addon" id="sizing-addon1">单位名称</span>
+        <!-- 单位列表框-->
+        <select id="dwbh" class="form-control">
+        {{#each DW_LIST}}
+             <option value={{BHID}}>{{MC}}</option>
+        {{/each}}
+        </select>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-3">
+    <div class="input-group">
+         <span class="input-group-addon" id="sizing-addon1">物资编号</span>
+         <input id="wzbh" type="text" class="form-control" placeholder="007410101"sizing-addon1">
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-3">
+    <div class="input-group">
+      <input id="search_str" type="text" class="form-control" placeholder="模糊查询条件" title = "可输入物资名称、型号、车型等信息" >
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" onclick="change_sth()">查询</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+
+
+
+
+
+
+
+
+
+<div id="wzdetail">
+   查询结果显示区
+</div>
+
+<script>
+    
+    //写AJAX日志到div  
+function ajaxLog(s) {
+    var txt = $('#log2');
+    txt.html(txt.html() + '\n' + s + document.getElementById('dwbh').value +  document.getElementById('wzbh').value);
+};
+    
+    function ajaxLog2(s) {
+    var txt = $('#wzdetail');
+    txt.html(s);
+};
+    
+    function change_sth(){
+           // alert('jQuery版本：' + $.fn.jquery);
+        var j1 = $('#abc');
+        j1.text('JavaScript & ECMAScript'+ document.getElementById('wzbh').value);
+        
+
+        
+        str_dwbh = document.getElementById('dwbh').value;
+        str_wzbh = document.getElementById('wzbh').value + '%';
+        str_search_str = '%'+ document.getElementById('search_str').value +'%';
+
+         
+               $('#abc2').html('<span style="color: red">JavaScript</span>');      
+        
+
+       // if(str_dwbh.length ) str_dwbh = '%'   ;
+       // if(!str_wzbh) str_wzbh = '%'   ;
+       // if(!str_search_str) str_search_str = '%' ;
+        
+        //获取查询字符串        
+        var jqxhr = $.get('/statistics/in_st', {
+            dwbh: str_dwbh,
+            wzbh: str_wzbh,
+            search_str: str_search_str
+            }).done(function (data) {
+                    ajaxLog2(data);
+            }).fail(function (xhr, status) {
+                    ajaxLog('失败: ' + xhr.status + ', 原因: ' + status);
+            }).always(function () {
+                    ajaxLog('__dwbh' + str_dwbh + ',wzbh:' + str_wzbh + ',search:'  +str_serach_str);
+            });
+            
+            
+     
+
+        
+    };
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    </script>
+    
+    
+    
+    
+    <div id="abc">
+    abc div
+</div>
+<br>
+<div id="abc2">
+    abc div
+</div>
+
+<div id="log2">
+    ajax log
+</div>

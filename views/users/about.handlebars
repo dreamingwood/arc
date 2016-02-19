@@ -1,0 +1,31 @@
+
+
+ <div class="page-header">
+        <h1>测试读取表格信息</h1>
+
+
+
+ 
+
+          <table class="table table-striped" >
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>物资编号</th>
+                <th>物资名称</th>
+                <th>系统</th>
+              </tr>
+            </thead>
+            <tbody>
+     {{#each JIHUA}}
+              <tr>
+                <td>1</td>
+                <td>{{SMATLCODE}}</td>
+                <td>{{SMATLNAME}}</td>
+                <td>{{XT}}</td>
+              </tr>
+     {{/each}}
+ 
+            </tbody>
+          </table>
+</div>
