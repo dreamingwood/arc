@@ -11,7 +11,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/about', function(req, res, next) {
       // res.render('index', { title: 'Express' ,user: 'WOOD'});
-   res.render('about');
+   res.render('about',{
+       pageTestScript: '/qa/tests-about.js'
+   });
 });
 
 router.get('/thank-you', function(req, res){

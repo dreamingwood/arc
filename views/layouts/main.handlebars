@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
+      
+      {{#if showTests}}
+            <link rel="stylesheet" href="/vendor/mocha.css"> 
+      {{/if}}
+      <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+        <!-- 调试需要jquery在此处引入 -->
+      
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,19 +53,20 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="/users/about">数据库测试</a></li>
-            <li><a href="/statistics/in_st">收料统计</a></li>
-            <li><a href="/statistics/in_st_querypage">收料分类统计</a></li>            
-            <li><a href="/statistics/in_detail">明细</a></li>
-                        <li><a href="/statistics/div_summary">供应科总结</a></li>
-            <li><a href="/statistics/in_wz_search">物资信息查询</a></li>
-            <li><a href="/statistics/in_wz_search_querypage">查询条件页</a></li>
-            
+            <li class="active"><a href="/">Home</a></li>
+
+     <!--       <li><a href="/users/about">数据库测试</a></li>-->
+     <!--       <li><a href="/statistics/in_st">收料统计</a></li>  -->
+            <li><a href="/statistics/in_st_querypage">收料分类</a></li>            
+           <!-- <li><a href="/statistics/in_detail">明细</a></li>  -->
+                     
+            <!-- <li><a href="/statistics/in_wz_search">物资信息查询</a></li>  -->
+            <li><a href="/statistics/in_wz_search_querypage">收料明细</a></li>
+            <li><a href="/statistics/div_summary">供应科总结</a></li>
             <li><a href="/users/testjavascript">JS测试</a></li>
             <li><a href="/users/newsletter">form test</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -123,13 +131,33 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    
+    <!--  为了调试需要，此处引用放到页首head，版本该用jquery 2-->
+    <!--    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>   -->
+    
+    
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="../../assets/js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
     
     
+    {{#if showTests}}
+            <div id="mocha">hello</div>
+            <script src="/vendor/mocha.js"></script> <script src="/vendor/chai.js"></script> <script>
+                    mocha.ui('tdd');
+                    var assert = chai.assert; </script>
+            <script src="/qa/tests-global.js"></script> {{#if pageTestScript}}
+            <script src="{{pageTestScript}}"></script> {{/if}}
+            <script>mocha.run();</script> 
+    {{/if}}
+    
+    
+</body>
+
+
+
+
 
   </body>
 </html>
