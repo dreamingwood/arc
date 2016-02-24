@@ -46,9 +46,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="active" id="username"><a href="/users/login">登录</a></li>
+            <li><a href="/users/reg" id="reg">注册</a></li>
+            <li><a href="/users/logout">退出</a></li>
             <li><a href="/users/about">数据库测试</a></li>
             <li><a href="/statistics/in_st">收料统计</a></li>
             <li><a href="/statistics/in_st_querypage">收料分类统计</a></li>            
@@ -85,10 +85,25 @@
         <h1>正确地做事  不要走捷径</h1>
         <p>当你不知道该做什么的时候，就把手头的每件小事做好；当你不知道怎么开始时，就把离你最近的事情做好。</p>
       -->
+
+
         </div>
        </div>      
     
+      {{#if flash}}
+             <div class="alert alert-dismissible alert-{{flash.type}}">
+                 <button type="button" class="close"
+                        data-dismiss="alert" aria-hidden="true">&times;<button>
+                 <strong>{{flash.intro}}</strong> {{{flash.message}}}
+                </div>
+       {{/if}}    
+
+    
+    
+    
 <div class="page-header"> 
+
+
           {{{body}}}
   
 <div>
