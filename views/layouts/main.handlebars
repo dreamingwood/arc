@@ -54,7 +54,9 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
-
+            <li class="active" id="username"><a href="/users/login">登录</a></li>
+            <li><a href="/users/reg" id="reg">注册</a></li>
+            <li><a href="/users/logout">退出</a></li>
      <!--       <li><a href="/users/about">数据库测试</a></li>-->
      <!--       <li><a href="/statistics/in_st">收料统计</a></li>  -->
             <li><a href="/statistics/in_st_querypage">收料分类</a></li>            
@@ -63,10 +65,13 @@
             <!-- <li><a href="/statistics/in_wz_search">物资信息查询</a></li>  -->
             <li><a href="/statistics/in_wz_search_querypage">收料明细</a></li>
             <li><a href="/statistics/div_summary">供应科总结</a></li>
+
+            <li><a href="/statistics/in_wz_search_querypage">查询条件页</a></li>           
+            
+            
             <li><a href="/users/testjavascript">JS测试</a></li>
             <li><a href="/users/newsletter">form test</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -95,6 +100,17 @@
       -->
         </div>
        </div>      
+    
+         {{#if flash}}
+             <div class="alert alert-dismissible alert-{{flash.type}}">
+                 <button type="button" class="close"
+                        data-dismiss="alert" aria-hidden="true">&times;<button>
+                 <strong>{{flash.intro}}</strong> {{{flash.message}}}
+                </div>
+       {{/if}}     
+    
+    
+    
     
 <div class="page-header"> 
           {{{body}}}
