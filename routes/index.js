@@ -20,4 +20,14 @@ router.get('/thank-you', function(req, res){
 	res.render('thank-you');
 });
 
+
+
+
+
+
+
+
+
+
+
 module.exports = router;

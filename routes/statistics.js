@@ -3,7 +3,7 @@ var router = express.Router();
 var async = require('async');
 var sqlite3 = require('sqlite3').verbose();
 var bodyParser = require('body-parser');
-
+var checklogin = require('../lib/checklogin.js')
 
 var str = "";
 
@@ -225,7 +225,7 @@ router.get('/in_st2', function(req, res, next) {
   
 });
 
-
+router.get('/div_summary', checklogin.checkLogin);
 //供应科总结
 router.get('/div_summary', function(req, res, next) {
 
