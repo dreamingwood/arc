@@ -280,6 +280,13 @@ router.get('/api_div_summary', function(req, res, next) {
 });
 
 
+router.get('/api', function(req, res, next) {
+
+res.render('../views/statistics/api_div_summary')  ;
+  
+});
+
+
 
 
 //未开发，备用
