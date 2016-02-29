@@ -21,25 +21,7 @@ var get_result = function(callback) {
     });
 }
 
-//初始科室总结数据
-var get_div_summary = function(callback,ny_id) {
-    var db2 = new sqlite3.Database('./db/node.db', function () {
-        
-        //求父分类，如果父分类为空，则赋值为根节点
 
-
-        
-        db2.all("select CY_JE + GG_JE ZGS_HJ,* from Z_LUJU_GONGYING where NY_ID like ? ORDER BY NY_ID DESC ",ny_id, function (err, res) {
-            //statistics  st   分类 fl   all 所有五级分类的汇总表
-            if (!err) {
-                callback(res);
-               // console.log(str);//@1 这里输出的是有值的str
-            }else {
-                console.log(err);
-            }
-        });
-    });
-}
 
 
 
@@ -225,6 +207,32 @@ router.get('/in_st2', function(req, res, next) {
   
 });
 
+
+
+
+
+
+//初始科室总结数据
+var get_div_summary = function(callback,ny_id) {
+    var db2 = new sqlite3.Database('./db/node.db', function () {
+        
+        //求父分类，如果父分类为空，则赋值为根节点
+
+
+        
+        db2.all("select CY_JE + GG_JE ZGS_HJ,* from Z_LUJU_GONGYING where NY_ID like ? ORDER BY NY_ID DESC ",ny_id, function (err, res) {
+            //statistics  st   分类 fl   all 所有五级分类的汇总表
+            if (!err) {
+                callback(res);
+               // console.log(str);//@1 这里输出的是有值的str
+            }else {
+                console.log(err);
+            }
+        });
+    });
+}
+
+
 router.get('/div_summary', checklogin.checkLogin);
 //供应科总结
 router.get('/div_summary', function(req, res, next) {
@@ -246,6 +254,31 @@ router.get('/div_summary', function(req, res, next) {
   
   
 });
+
+
+
+router.get('/api_div_summary', function(req, res, next) {
+
+//nothing toto
+  if(req.param('ny_id')){
+            get_div_summary(function(db_data){
+            console.log(db_data);
+            res.json(db_data);
+            // res.render('../views/statistics/div_summary',{DIV_SUMMARY : db_data});
+        },req.param('ny_id'))
+  }
+  else{
+              get_div_summary(function(db_data){
+        console.log(db_data);
+        res.json(db_data);
+        //res.render('../views/statistics/div_summary',{DIV_SUMMARY : db_data});
+        },'%')
+      
+  }
+  
+  
+});
+
 
 
 
