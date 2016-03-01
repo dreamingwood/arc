@@ -5,7 +5,9 @@
       {{#if showTests}}
             <link rel="stylesheet" href="/vendor/mocha.css"> 
       {{/if}}
-      <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+      <script src="/jquery/jquery-2.2.0.min.js"></script>
+      <script src="/jquery/jquery-ui-1.11.4/jquery-ui.js"></script>
+      <script src="/jquery/jquery-ui-1.11.4/jquery-ui.theme.css"></script>
         <!-- 调试需要jquery在此处引入 -->
       
     <meta charset="utf-8">
@@ -14,21 +16,21 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <!--  <link rel="icon" href="../../favicon.ico">-->
 
     <title>物资供应管理系统</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <link href="../../dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="theme.css" rel="stylesheet">
+   <!--  <link href="theme.css" rel="stylesheet">-->
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -36,7 +38,9 @@
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-   <script src ="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+ <!--  <script src ="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>-->
+  <!--   <script src ="/handlebars/handlebars.runtime-v4.0.5.js"></script>-->
+     <script src ="/handlebars/handlebars-v4.0.5.js"></script>
     
   </head>
 
@@ -78,7 +82,8 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
+                <li><a href="/statistics/div_summary_edit">api测试不带参数</a></li>
+
                 <li><a href="#">Another action</a></li>
                 <li><a href="#">Something else here</a></li>
                 <li role="separator" class="divider"></li>
@@ -155,10 +160,10 @@
     <!--    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>   -->
     
     
-    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/docs.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+   <!--  <script src="../../assets/js/docs.min.js"></script>-->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
     
     
     {{#if showTests}}

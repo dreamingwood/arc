@@ -280,9 +280,9 @@ router.get('/api_div_summary', function(req, res, next) {
 });
 
 
-router.get('/api', function(req, res, next) {
+router.get('/div_summary_edit', function(req, res, next) {
 
-res.render('../views/statistics/api_div_summary')  ;
+     res.render('../views/statistics/div_summary_edit')  ;
   
 });
 
@@ -329,8 +329,22 @@ router.get('/in_wz_search_querypage', function(req, res, next) {
 });
 
 
+router.get('/div_summary_new', function(req, res, next) {
+  
+
+      res.render('../views/statistics/div_summary_new');
+
+});
 
 
+
+router.post('/div_summary_new', function(req, res, next) {
+  
+
+    //console.log(db_data);
+      res.render('../views/statistics/in_wz_search_querypage',{DW_LIST:db_data});
+
+});
 
 
 module.exports = router;
