@@ -17,16 +17,15 @@ var handlebars = require('express-handlebars')
 var settings = require('./settings/settings');
 var app = express();
 
-// view engine setup
+// 设置模板引擎 
 app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'jade');
 app.engine('handlebars',handlebars.engine);
 app.set('view engine', 'handlebars');
 
+//设置允许flash 消息
 app.use(flash());
 
-
-
+//通过数据库存储session
 app.use(session({
   secret: settings.cookieSecret,
   key: settings.db,//cookie name
@@ -36,10 +35,12 @@ app.use(session({
   })
 }));
 
+//设置flash消息
 app.use(function(req, res, next){
 // if there's a flash message, transfer
 // it to the context, then clear it
 res.locals.flash = req.session.flash;
+res.locals.user = req.session.user;
 delete req.session.flash;
 next();
 });
@@ -52,15 +53,19 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//设置静态服务
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+//设置调试
 app.use(function(req, res, next){
 res.locals.showTests = app.get('env') !== 'production' &&
                     req.query.test === '1';
             next();
 });
 
+
+//设置路由
 app.use('/', routes);
 app.use('/users', users);
 app.use('/about',users); //  ------

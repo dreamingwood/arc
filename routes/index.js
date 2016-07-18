@@ -6,7 +6,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
       // res.render('index', { title: 'Express' ,user: 'WOOD'});
-   res.render('home');
+   res.render('home',{whois:"whois",whoare:"whoareyou"});
 });
 
 router.get('/about', function(req, res, next) {

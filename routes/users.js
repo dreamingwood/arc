@@ -5,7 +5,7 @@ var sqlite3 = require('sqlite3').verbose();
 var bodyParser = require('body-parser');
 var crypto = require('crypto');
 var User = require('../lib/user.js');
-
+var formidable = require('formidable')
 
 var str = "";
 
@@ -21,6 +21,8 @@ var get_result = function(callback) {
         });
     });
 }
+
+
 
 
 router.post('/reg', function(req, res) {

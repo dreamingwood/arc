@@ -1,7 +1,84 @@
+
+
+<div class ="container">
+<h2> 新用户注册</h2>
+<div class = "row" ><h1></h1></div>
+
+
+<div class = "row" >
+<div class = "col-lg-6" >
+
+
 <form method="post">
-  用户名：  <input type="text" name="name"/><br />
-  密码：    <input type="password" name="password"/><br />
-  确认密码：<input type="password" name="password-repeat"/><br />
-  邮箱：    <input type="email" name="email"/><br />
-            <input type="submit" value="注册"/>
+  <div class="form-group" >
+	  <label for = "name1"> 用户名</label>
+	  <input type="text" class="form-control" id="name" name="name" placeholder="用户名，可以是中文，不能和别人重复">
+  </div>
+
+
+ 
+
+  <div class="form-group">
+    	  <label for = "pass1">  密码： </label>
+        <input id = "pass1"  class="form-control" type="password" name="password"  placeholder="密码，至少6位">
+  </div>
+
+
+    <div class="form-group">
+    	  <label for = "password-repeat">  确认密码： </label>
+        <input id = "password-repeat"  class="form-control" type="password" name="password-repeat" placeholder="确认密码" >
+  </div>
+         
+  <div class="form-group" >
+	  <label for = "email"> 邮箱：</label>
+	  <input type="email" class="form-control" id="email" name="email"/>
+  </div>
+
+  <div class="checkbox">
+      <label>
+          <input type="checkbox"> 我遵守注册规定
+      </label>
+  </div>
+                  
+   <button type="submit" id="reg_but" class = "btn btn-default" > 注册新用户 </button>
+ 
 </form>
+
+
+
+
+
+<script type="text/javascript">
+    // $("input").focus(function(){
+    //     $("#cuowukuang").fadeOut();
+    // });
+   $("#reg_but").click(function(){
+       //注册按钮的事件，用ajax提交表单
+       $.post("/doregist",{
+           "username" : $("#username").val(),
+           "password" : $("#password").val()
+       },function(result){
+           if(result == "1"){
+               //注册成功
+               alert("注册成功！将自动跳转到首页");
+               window.location = "/";
+           }else if(result == "-1"){
+               //用户名被占用
+               $("#cuowukuang").fadeIn();
+               $("#cuowukuang").html("用户名被占用啊！");
+           }else if(result == "-3"){
+               //服务器错误
+           }
+       });
+   });
+</script>
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
