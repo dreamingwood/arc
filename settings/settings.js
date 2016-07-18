@@ -1,4 +1,6 @@
 
+
+//cookieSecret 用于cookie数据加密
 module.exports = { 
   cookieSecret: 'myblog', 
   db: 'blog', 
@@ -6,6 +8,7 @@ module.exports = {
   port: 27017,
   url:'mongodb://localhost/blog'
 };
+
 
 //使用书中方式报异常，用url表述ok
 

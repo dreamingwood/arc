@@ -31,9 +31,19 @@ app.use(session({
   key: settings.db,//cookie name
   cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
   store: new MongoStore({
-    url: settings.url
-  })
+        url: settings.url
+  }),
+  resave: true,
+	saveUninitialized: true
+
 }));
+
+
+// app.use(session({
+//   cookie:{maxAge:3600000},
+//   secret:settings.cookieSecret,
+//   store:new MongoStore({db:settings.cookieSecret})}));
+
 
 //设置flash消息
 app.use(function(req, res, next){
