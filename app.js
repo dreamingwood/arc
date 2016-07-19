@@ -9,6 +9,7 @@ var MongoStore = require('connect-mongo')(session);
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var statistics = require('./routes/statistics');
+var posts = require('./routes/posts');
 var flash = require('connect-flash');
 
 var handlebars = require('express-handlebars')
@@ -80,6 +81,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/about',users); //  ------
 app.use('/statistics',statistics); //  ------
+app.use('/posts',posts); //  ------
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
