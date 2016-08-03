@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="/easyui/demo/demo.css">
+	<script type="text/javascript" src="/jquery/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/easyui/jquery.edatagrid.js"></script>
+</head>
+<body>
+  
+        <!-- Step 1: Define DataGrid in HTML tag -->
+        <table id="dg" title="My Users" style="width:550px;height:250px"
+                toolbar="#toolbar" idField="id"
+                rownumbers="true" fitColumns="true" singleSelect="true">
+            <thead>
+                <tr>
+                    <th field="NY" width="50" editor="{type:'validatebox',options:{required:true}}">年月</th>
+                    <th field="TYPE" width="50" editor="text">类型</th>
+                    <th field="PRICE_10MM" width="50" editor="numberbox">10mm以上</th>
+                    <th field="PRICE_4MM" width="50" editor="{type:'numberbox',options:{precision:2}}">4mm以上</th>
+                    <th field="PRICE" width="50" editor="{type:'numberbox',options:{precision:2}}">price</th>
+                     <th field="PRICE_DATE" width="50" editor="datebox">4mm以上</th>
+                </tr>
+            </thead>
+        </table>
+        <div id="toolbar">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#dg').edatagrid('addRow')">New</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Save</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a>
+        </div>
+        
+
+        <script>
+            //Step 2: Make an editable DataGrid
+            $('#dg').edatagrid({
+                url: '/statistics/api_scrap_get',
+                saveUrl: '/statistics/api_scrap_new',
+                updateUrl: '/statistics/api_scrap_update',
+                destroyUrl: '/statistics/api_scrap_delete'
+            });
+         </script>
+
+</body>
+</html>

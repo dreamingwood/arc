@@ -4,8 +4,310 @@ var async = require('async');
 var sqlite3 = require('sqlite3').verbose();
 var bodyParser = require('body-parser');
 var checklogin = require('../lib/checklogin.js')
-
+var oracledb = require('oracledb');
 var str = "";
+
+oracledb.autoCommit = true;
+
+
+ function OracleRelease(connection) 
+ { 
+   connection.release( 
+     function(err) { 
+       if (err) { 
+         console.error(err.message); 
+       } 
+     }); 
+ } ;
+
+
+
+
+
+//废钢铁价格表--从客户端获取信息，保存入数据库
+
+router.post('/api_scrap_delete', function(req, res, next) {
+
+        oracledb.getConnection(
+        {
+            user          : "arc",
+            password      : "benwood",
+            connectString : "localhost/XE"
+        },
+        function(err, connection)
+        {
+            if (err) { console.error(err.message); return; }
+        
+            connection.execute(
+            "delete * from DIC_SCRAP_PRICE_test  where NY like :ed" ,
+            [req.body.NY],
+            {outFormat:oracledb.OBJECT}, 
+            function(err, result)
+            {
+                if (err) { console.error(err.message); OracleRelease(connection) ;return; } 
+                // res.json(result.rows);
+                // console.log(result.rows);
+                console.log(req.body.NY + "delete/n");
+                OracleRelease(connection) ;
+            });
+        });
+
+});
+
+
+//废钢铁价格表--从客户端获取信息，保存入数据库
+
+router.post('/api_scrap_update', function (req, res, next) {
+
+    oracledb.getConnection(
+        {
+            user: "arc",
+            password: "benwood",
+            connectString: "localhost/XE"
+        },
+        function (err, connection) {
+            if (err) { console.error(err.message); OracleRelease(connection); return; }
+
+            var update_sql = `update DIC_SCRAP_PRICE_TEST t set `
+                + ` t.ny= '${req.body.NY}',`
+                + ` t.type= '${req.body.TYPE}',`
+                + ` t.price= ${req.body.PRICE + 0},`
+                + ` t.remark= '${req.body.REMARK}',`
+                + ` t.price_10mm= ${req.body.PRICE_10MM + 0},`
+                + ` t.price_4mm= ${req.body.PRICE_4MM + 0}`
+                + ` where t.ny = '${req.body.NY}'`;
+
+            console.log(update_sql);
+
+            connection.execute(
+                update_sql,
+                [],
+                { outFormat: oracledb.OBJECT },
+                function (err, result) {
+                    if (err) { console.error(err.message); OracleRelease(connection); return; }
+                    // res.json(result.rows);
+                    // console.log(result.rows);
+                    console.log("update/n");
+                    OracleRelease(connection);
+                }
+            );
+
+        });
+
+});
+
+//废钢铁价格表--从客户端获取信息，保存入数据库
+
+router.post('/api_scrap_new', function(req, res, next) {
+
+
+        var insert_sql = `insert into DIC_SCRAP_PRICE_test t VALUES ( `
+                + `'${req.body.NY}',`
+                + `  '${req.body.TYPE + ''}',`
+                + ` ${req.body.PRICE + 0},`
+                + `  '${req.body.REMARK + ''}',`
+                + ` ${req.body.PRICE_10MM + 0},`
+                + `  ${req.body.PRICE_4MM + 0},`
+                + ` '')`
+                ;
+
+        console.log(insert_sql);      
+        oracledb.getConnection(
+        {
+            user          : "arc",
+            password      : "benwood",
+            connectString : "localhost/XE"
+        },
+        function(err, connection)
+        {
+            if (err) { console.error(err.message); return; }
+        
+            connection.execute(
+            insert_sql,
+            [],
+            {outFormat:oracledb.OBJECT}, 
+            function(err, result)
+            {
+                if (err) { console.error(err.message); OracleRelease(connection) ;return; } 
+                // res.json(result.rows);
+                // console.log(result.rows);
+                console.log("save/n");
+                OracleRelease(connection) ;
+            });
+        });
+
+});
+
+
+//废钢铁价格表----从oracle 获取库存信息,返回JSON数据
+
+router.post('/api_scrap_get', function(req, res, next) {
+
+        oracledb.getConnection(
+        {
+            user          : "arc",
+            password      : "benwood",
+            connectString : "localhost/XE"
+        },
+        function(err, connection)
+        {
+            if (err) { console.error(err.message);OracleRelease(connection); return; }
+        
+            connection.execute(
+            "select * from DIC_SCRAP_PRICE_test t where NY like :ed" ,
+            ['%'],
+            {outFormat:oracledb.OBJECT}, 
+            function(err, result)
+            {
+                if (err) { console.error(err.message);OracleRelease(connection) ; return; } 
+                res.json(result.rows);
+                // console.log(result.rows);
+                console.log("get/n");
+                OracleRelease(connection) ;
+            });
+        });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+//echarts 矩形挖掘图 测试用
+
+
+var get_result_in_info = function(callback,req) {
+
+
+    var db2 = new sqlite3.Database('./db/node.db', function () {
+        db2.all("select * from A_ST_FL_ALL where DWMC like ?", 
+         req.param('dwmc'),
+         function (err, res) {
+            if (!err) {
+                callback(res);
+               // console.log(str);//@1 这里输出的是有值的str
+            }else {
+                console.log(err);
+            }
+        });
+    });
+}
+
+
+//echarts 矩形挖掘图 测试用
+router.get('/api_info', function(req, res, next) {
+
+            get_result_in_info(function(db_data){
+                console.log(db_data);
+                    res.json(db_data);
+            },
+             req
+            );
+
+        
+        
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//从oracle 获取库存信息,返回JSON数据
+
+router.get('/api_kucun_summary', function(req, res, next) {
+
+//nothing toto
+ 
+oracledb.getConnection(
+  {
+    user          : "arc",
+    password      : "benwood",
+    connectString : "localhost/XE"
+  },
+  function(err, connection)
+  {
+    if (err) { console.error(err.message); return; }
+ 
+    connection.execute(
+      "select * from KC_SUMMARY2015 t where sunitname like :ed" ,
+      ['%新乡机务段%'],
+      {outFormat:oracledb.OBJECT}, 
+      function(err, result)
+      {
+        if (err) { console.error(err.message); return; } 
+        res.json(result.rows);
+        console.log(result.rows);
+      });
+  });
+
+});
+
+    
+
+router.get('/api_kucun_summary_all', function(req, res, next) {
+
+//nothing toto
+ 
+oracledb.getConnection(
+  {
+    user          : "arc",
+    password      : "benwood",
+    connectString : "localhost/XE"
+  },
+  function(err, connection)
+  {
+    if (err) { console.error(err.message); return; }
+ 
+    connection.execute(
+      "select * from KC_SUMMARY2015 t where sunitname like :ed" ,
+      ['%机务段%'],
+      {outFormat:oracledb.OBJECT}, 
+      function(err, result)
+      {
+        if (err) { console.error(err.message); return; } 
+        res.json(result.rows);
+        console.log(result.rows);
+      });
+  });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //get_result 测试版函数，可以删除
 var get_result = function(callback) {

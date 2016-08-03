@@ -2,12 +2,35 @@
 <head>
     <meta charset="utf-8">
     <title>ECharts</title>
+
+      <script src="/jquery/jquery-3.1.0.min.js"></script>
+      <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
 </head>
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
     <div id="main" style="height:400px"></div>
     <!-- ECharts单文件引入 -->
     <script src="/echarts/echarts.js"></script>
+
+<div id = "ajaxdata2" class = "ajaxdata">
+    ajaxdata
+</div>
+ <button class="btn btn-primary" type="button" onclick="show_chart()">显示图表</button>
+
+    <script>
+        $(document).ready(function () {
+            getdata();
+        });
+ var myChart;
+ var option;
+ var datatest;
+</script>
+
+
+
+
     <script type="text/javascript">
         // 路径配置  配置下面三行，注意使用绝对路径
         require.config({
@@ -24,9 +47,9 @@
             ],
             function (ec) {
                 // 基于准备好的dom，初始化echarts图表
-                var myChart = ec.init(document.getElementById('main')); 
+                 myChart = ec.init(document.getElementById('main')); 
                 
-                var option = {
+                 option = {
                     tooltip: {
                         show: true
                     },
@@ -41,12 +64,12 @@
                     ],
                     yAxis : [
                         {
-                            type : 'value'
+                            type : '万元'
                         }
                     ],
                     series : [
                         {
-                            "name":"销量",
+                            "name":"库存",
                             "type":"bar",
                             "data":[5, 20, 40, 10, 10, 20]
                         }
@@ -56,7 +79,86 @@
         
                 // 为echarts对象加载数据 
                 myChart.setOption(option); 
+
             }
         );
+
     </script>
+
+
+
+
+<script>
+
+    //获取图标函数，ajax 获取数据成功后画图
+
+
+
+
+
+    function show_chart(data){
+
+
+
+
+
+
+                option.series[0].data =[]; //清空数值
+                option.xAxis[0].data = []; 
+                //datatest = data;
+                 option.legend.data[0] = data[0].SUNITNAME;   //设置图例
+                 //给x轴标签，数据赋值
+                for(var i=0; i<data.length; i++)
+                {
+                    option.series[0].data.push(data[i].NNOWAMOUNT);
+                    option.xAxis[0].data.push(data[i].SYEARMONTH);
+                };
+
+                myChart.setOption(option);  //设置图表
+    };
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+    function getdata(){
+        $("#ajaxdata2").html("begin");
+                var jqxhr = $.get('/statistics/api_kucun_summary', {
+
+            }).done(function (data) {
+
+                show_chart(data);//画图
+
+            }).fail(function (xhr, status) {
+                   // ajaxLog('失败: ' + xhr.status + ', 原因: ' + status);
+                    $("#ajaxdata2").html("fails");
+            }).always(function () {
+                   // ajaxLog('__dwbh' + str_dwbh + ',wzbh:' + str_wzbh + ',search:'  +str_serach_str);
+                 //  $("#ajaxdata2").html("always");
+            });
+    };
+
+
+
+
+
+
+</script>
+
+
+      <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+
 </body>

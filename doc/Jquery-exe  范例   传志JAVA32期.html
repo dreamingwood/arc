@@ -1,0 +1,436 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>exe_1.html</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  	<script type="text/javascript" src="../js/jquery-1.8.2.js"></script>
+  </head>
+  <body>
+  
+  	<p>段落1</p>
+  	<p>段落2</p>
+  	<p>段落3</p>
+  	
+  	<script type="text/javascript">
+  		//定位3个p标签
+  		$("p").click( function(){
+  			alert( $(this).text() );
+  		} )
+  	</script>
+  	
+  </body>
+</html>
+
+
+
+ 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>exe_2.html</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  	<script type="text/javascript" src="../js/jquery-1.8.2.js"></script>
+  </head>
+  <body>
+  	<form>
+		<table border="1" align="center" width="70%">
+			<tr>
+				<th>用户名</th>
+				<th>密码</th>
+				<th>0</th>
+			</tr>
+			<tr>
+				<td>张三</td>
+				<td>123456</td>
+				<th>1</th>
+			</tr>
+			<tr>
+				<td>李四</td>
+				<td>654321</td>
+				<th>2</th>
+			</tr>
+			<tr>
+				<td>王五</td>
+				<td>162534</td>
+				<th>3</th>
+			</tr>
+		</table> 
+	</form>
+	
+	
+	<script type="text/javascript">
+
+		//NO1)将索引号为奇数的行背景色设为蓝色
+		$("table tr:odd").css("background-color","blue");
+				
+		//NO2)将索引号为偶数的行背景色设为黄色
+		$("table tr:even").css("background-color","yellow");
+
+		//NO3)将第一行背景色设为粉色
+		$("table tr:first").css("background-color","pink");
+		
+	</script> 	
+  
+  </body>
+</html> 
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>exe_3.html</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  	<script type="text/javascript" src="../js/jquery-1.8.2.js"></script>
+  </head>
+  <body>
+	
+	<input type="checkbox" value="篮球"/>篮球
+	<input type="checkbox" value="排球"/>排球	
+	<input type="checkbox" value="羽毛球"/>羽毛球	
+	<input type="checkbox" value="乒乓球"/>乒乓球
+	
+	<input type="button" value="选中的个数"/>
+	<input type="button" value="依次显示选中的value"/>
+	
+	<script type="text/javascript">
+		//定位"选中的个数"按钮，同时添加单击事件
+		$(":button:first").click( function(){
+			//获取选中的复选框个数
+			var size = $(":checkbox:checked").size();	
+			//判断
+			if(size == 0){
+				alert("这家伙太赖了");
+			}else{
+				alert("你选中了"+size+"个项目");
+			}
+		} );
+		//定位"依次显示选中的value"按钮，同时添加单击事件
+		$(":button:last").click( function(){
+			//获取选中的复选框
+			var $checkbox = $(":checkbox:checked");
+			//迭代所有选中的复选框的value属性值
+			$checkbox.each(function(){
+				//alert( $(this).val() );//提倡
+				alert( this.value );//不提倡
+			});
+		} );
+	</script>
+	
+  </body>
+</html>
+
+
+
+
+ 
+
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="../js/jquery-1.8.2.js"></script>
+  </head>
+  <body>
+  	<div>	
+	  	<select style="width:60px" multiple size="10" id="leftID">
+	  		<option>选项A</option>
+	  		<option>选项B</option>
+	  		<option>选项C</option>
+	  		<option>选项D</option>
+	  		<option>选项E</option>
+	  		<option>选项F</option>
+	  		<option>选项G</option>
+	  		<option>选项H</option>
+	  		<option>选项I</option>
+	  		<option>选项J</option>
+	  	</select>
+  	</div>
+  	<div style="position:absolute;left:100px;top:60px">
+  		<input type="button" value="批量右移" id="rightMoveID"/>
+  	</div>
+  	<div style="position:absolute;left:100px;top:90px">
+  		<input type="button" value="全部右移" id="rightMoveAllID"/>
+  	</div>
+  	<div style="position:absolute;left:220px;top:20px">	
+	  	<select multiple size="10" style="width:60px" id="rightID">
+	  	</select>
+  	</div>
+  </body>
+  
+  <script type="text/javascript">
+  		
+  		//双击右移
+  		//定位左边的下拉框，同时添加双击事件
+  		$("#leftID").dblclick(function(){
+  			//获取双击时选中的option标签
+  			var $option = $("#leftID option:selected");
+  			//将选中的option标签移动到右边的下拉框中
+  			$("#rightID").append( $option );
+  		});
+  		
+	  	//批量右移
+	  	//定位批量右移按钮，同时添加单击事件
+		$("#rightMoveID").click(function(){
+			//获取左边下拉框中选中的option标签
+			var $option = $("#leftID option:selected");
+			//将选中的option标签移动到右边的下拉框中
+  			$("#rightID").append( $option );
+		});	  	
+
+  		//全部右移
+  		//定位全部右移按钮，同时添加单击事件
+  		$("#rightMoveAllID").click(function(){
+  			//获取左边下拉框中所有的option标签
+  			var $option = $("#leftID option");
+  			//将选中的option标签移动到右边的下拉框中
+  			$("#rightID").append( $option );
+  		});
+  		
+  </script>
+  
+</html>
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.8.2.js"></script> 
+  </head>
+  <body>
+  	<table id="tableID" border="1" align="center" width="60%">
+  		<thead>
+	  		<tr>	
+	  			<th>用户名</th>
+	  			<th>密码</th>
+	  			<th>操作</th>
+	  		</tr>
+  		</thead>
+  		<tbody id="tbodyID">
+  			<!-- 动态增加行 
+  			<tr>
+  				<td>哈哈</td>
+  				<td>123</td>
+  				<td><input type="button" value="删除" onclick=""/></td>
+  			</tr>
+  			-->
+  		</tbody>
+  	</table>
+  	
+  	<hr/>
+  	用户名：<input type="text" id="usernameID"/>
+  	密码：  <input type="text" id="passwordID"/>
+  			<input type="button" value="增加" id="addID"/>
+  			
+  </body>
+  
+  <script type="text/javascript">
+  		//定位"增加"按钮，同时添加单击事件
+  		$("#addID").click(function(){
+  			//获取用户名和密码的值
+  			var username = $("#usernameID").val();
+  			var password = $("#passwordID").val();
+  			//去掉二边的空格
+  			username = $.trim(username);
+  			password = $.trim(password);
+  			//如果用户名或密码没有填
+  			if(username.length == 0 || password.length == 0){
+				//提示用户  				
+  				alert("用户名或密码没有填");
+  			}else{
+  				//创建1个tr标签
+  				var $tr = $("<tr></tr>");
+  				//创建3个td标签
+  				var $td1 = $("<td>"+username+"</td>");
+  				var $td2 = $("<td>"+password+"</td>");
+  				var $td3 = $("<td></td>");
+  				//创建input标签，设置为删除按钮
+  				var $del = $("<input type='button' value='删除'>");
+  				//为删除按钮动态添加单击事件
+  				$del.click(function(){
+  					//删除按钮所有的行，即$tr对象
+  					$tr.remove();
+  				});
+  				//将删除按钮添加到td3标签中
+  				$td3.append($del);
+  				//将3个td标签依次添加到tr标签中
+  				$tr.append($td1);
+  				$tr.append($td2);
+  				$tr.append($td3);
+  				//将tr标签添加到tbody标签中
+  				$("#tbodyID").append($tr);
+  				//清空用户名和密码文本框中的内容
+  				$("#usernameID").val("");
+  				$("#passwordID").val("");
+  			}
+  		});
+  </script>
+  
+</html>
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<script type="text/javascript" src="../js/jquery-1.8.2.js"></script>
+	</head>
+	<body>
+		<table border="1" align="center">
+			<thead>
+				<tr>
+					<th>状态</th>
+					<th>用户名</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>赵</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>钱</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>孙</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>李</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>周</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>
+						<input type="checkbox" />
+						全选
+					</td>
+					<td>
+						<input type="button" value="全反选" />
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+		
+		<script type="text/javascript">
+			//全选中和全取消
+			//定位tfoot中的全选复选框，同时添加单击事件
+			$("tfoot input:checkbox").click(function(){
+				//获取该全选复选框的状态
+				var flag = this.checked; 
+				//如果选中
+				if(flag){
+					//将tbody中的所有复选框选中
+					$("tbody input:checkbox").attr("checked","checked");
+				//如果未选中
+				}else{
+					//将tbody中的所有复选框取消
+					$("tbody input:checkbox").removeAttr("checked");
+				}
+			});
+			
+		</script>
+		
+		<script type="text/javascript">
+			//全反选
+			//定位tfoot标签中的全反选按钮，同时添加单击事件
+			$("tfoot input:button").click(function(){
+				//将tbody标签中的所有选中的复选框失效
+				$("tbody input:checkbox:checked").attr("disabled","disabled");
+				//将tbody标签中的所有生效的复选框选中
+				$("tbody input:checkbox:enabled").attr("checked","checked");
+				//将tbody标签中的所有生效的复选框生效且设置为未选中
+				$("tbody input:checkbox:disabled").removeAttr("disabled").removeAttr("checked");
+			});
+			
+		</script>
+		
+	</body>
+</html>
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		.myClass{
+			color:inactivecaption
+		}
+	</style>
+    <script type="text/javascript" src="../js/jquery-1.8.2.js"></script>
+  </head>
+  <body>
+	<table border="1" align="center">
+		<tr>
+			<th>用户名</th>
+			<td>
+				<input type="text" value="输入用户名"/>
+			</td>
+		</tr>
+	</table>
+	
+	<script type="text/javascript">
+		//当浏览器加载web页面时
+		$(function(){
+			//将文本框中的文本样式改变
+			$(":text").addClass("myClass");
+		});
+	</script>
+	
+	<script type="text/javascript">
+		//当光标定位文本框时
+		$(":text").focus(function(){
+			//清空文本框中的内容
+			$(this).val("");
+			//删除文本框的样式
+			$(this).removeClass("myClass");
+		});
+	</script>	
+	
+	<script type="text/javascript">
+		//当文本框失去焦点时
+		$(":text").blur(function(){
+			//获取文本框中填入的内容
+			var content = $(this).val();
+			//去二边的空格
+			content = $.trim(content);
+			//如果没填了内容
+			if(content.length == 0){
+				//在文本框显示提示信息
+				$(":text").val("输入用户名");
+				//设置文本框中文本的样式
+				$(":text").addClass("myClass");
+			}	
+		});
+	</script>
+	
+  </body>
+</html>
+
+
+
+
+
+
+

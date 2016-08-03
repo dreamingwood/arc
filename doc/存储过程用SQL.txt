@@ -1,0 +1,30 @@
+
+
+---2016.7.26
+
+--  库存数据初始化
+create or replace procedure p_kucun_init authid current_user   as
+begin
+ execute immediate
+
+         'create table kc_summary2015
+                 as
+          select t.sunitcode,
+                 substr(t.sunitname, 6) sunitname,
+                 t.syearmonth,
+                 round(sum(t.nnowamount) / 10000, 0) nnowamount
+          from RMDICT_MATLCARD2015 t
+          group by t.sunitcode, substr(t.sunitname, 6), t.syearmonth
+          order by t.sunitcode, substr(t.sunitname, 6), t.syearmonth';
+end p_kucun_init;
+
+--  清除库存数据初始化时建立的表，一遍执行上述存储过程，进行重建。
+create or replace procedure p_kucun_init_drop_all_tables authid current_user   as
+
+begin
+       execute immediate 'drop table kc_summary2015';
+
+end p_kucun_init_drop_all_tables;
+
+
+
